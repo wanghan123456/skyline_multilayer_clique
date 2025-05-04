@@ -75,11 +75,13 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="Clique.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultilayerGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clique.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="MultilayerGraph.h" />

@@ -10,8 +10,8 @@ void Graph::LoadGraph(std::vector<mlg_edge>& edge_buf, int& start_pos, int& end_
 	this->out_file = file_name;
 
 	for (int i = start_pos; i <= end_pos; i++) {
-		int&& u = edge_buf[i].GetS();
-		int&& v = edge_buf[i].GetT();
+		int u = edge_buf[i].GetS();
+		int v = edge_buf[i].GetT();
 		if (start_pos > 0 && u == edge_buf[i - 1].GetS() && v == edge_buf[i - 1].GetT()) { continue; } //remove deplicated edges
 
 		this->m = this->m + 1;

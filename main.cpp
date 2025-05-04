@@ -9,21 +9,16 @@ int main(int argc, char* argv[]) {
 	MultilayerGraph mlg;
 	std::string infile_name = argv[1];
 	infile_name = infile_name + ".txt";
-
-	struct rusage usage;
-	getrusage(RUSAGE_SELF, &usage);
-	long peak_memory_start = usage.ru_maxrss;
-
 	mlg.LoadMLGraph(infile_name);
 	timer.Stop();
-
+	
+	// get peak memeory
+	struct rusage usage;
 	getrusage(RUSAGE_SELF, &usage);
-	long peak_memory_end = usage.ru_maxrss;
-	long peak_memory = std::max(peak_memory_start, peak_memory_end);
+	long peak_memory = usage.ru_maxrss;
 
 	mlg.PrintStatistics();
 
-	// get peak memeory
 	std::ofstream memory_file(DEFAULT_OUTFILE_PATH + infile_name, std::ios::app);
 	if (memory_file.is_open()) {
 		memory_file << "Peak memory usage: " << peak_memory << " KB" << std::endl;
