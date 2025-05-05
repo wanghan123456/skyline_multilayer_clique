@@ -8,15 +8,13 @@ public:
 		P.reserve(vtx_num);
 		X.reserve(vtx_num);
 		for (int i = 0; i < vtx_num; i++) {
-			R.insert(i);
 			P.insert(i);
-			X.insert(i);
 		}
 	}
 	~Clique() = default;
 
-	void BKP(std::unordered_set<int> R, std::unordered_set<int> P, std::unordered_set<int> X); //BK with pivot technique
-	void UpdatePX(); //update P and X
+	void BKP(std::unordered_set<int>& R, std::unordered_set<int>& P, std::unordered_set<int>& X); //BK with pivot technique
+	void UpdatePX(const int& vtx, std::unordered_set<int>& P, std::unordered_set<int>& X); //update P and X
 
 
 private:
