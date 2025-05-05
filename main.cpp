@@ -1,7 +1,8 @@
 #include "MultilayerGraph.h"
 #include "Timer.h"
-//argc - number of arguments
-//argv[0] - program
+#include "Clique.h"
+//argc - argument count
+//argv[0] - program name
 //argv[1] - infile path
 //argv[2] - outfile path
 int main(int argc, char* argv[]) {
@@ -19,10 +20,16 @@ int main(int argc, char* argv[]) {
 
 	mlg.PrintStatistics();
 
-	std::ofstream memory_file(DEFAULT_OUTFILE_PATH + infile_name, std::ios::app);
+	/*std::ofstream memory_file(DEFAULT_OUTFILE_PATH + infile_name, std::ios::app);
 	if (memory_file.is_open()) {
 		memory_file << "Peak memory usage: " << peak_memory << " KB" << std::endl;
 		memory_file.close();
+	}*/
+
+	if (mlg.GetL() > 0) {
+		const Graph& graph = mlg.GetGraph(0);
+		Clique clique(mlg.GetN(), graph);
+		clique.MCE();
 	}
 
 	return 0;

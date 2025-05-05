@@ -21,6 +21,10 @@ public:
 		return l;
 	}
 
+	[[nodiscard]] Graph GetGraph(int layer) const {
+		return slg_s[layer];
+	}
+
 	void LoadMLGraph(std::string& file_name);
 
 	void PrintStatistics(bool print_detail = false);
@@ -30,6 +34,6 @@ private:
 	int n{ -1 };
 	int m{ -1 };
 	std::string infile_name;
-	std::vector<Graph> slg_s;
+	std::vector<Graph> slg_s; //single-layer graph set
 };
 

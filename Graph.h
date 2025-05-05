@@ -55,6 +55,10 @@ public:
 	void LoadGraph(std::vector<mlg_edge>& edge_buf, int& start_pos, int& end_pos, const int num_vtx, std::string& file_name);
 
 	void PrintStatistics(bool print_detail = false);
+
+	const std::vector<std::vector<int>>& GetAdjList() const {
+		return adj_lst;
+	}
 	
 private:
 	int n{ 0 };
