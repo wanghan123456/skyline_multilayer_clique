@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
 	timer.Stop();
 	
 	// get peak memeory
-	struct rusage usage;
-	getrusage(RUSAGE_SELF, &usage);
-	long peak_memory = usage.ru_maxrss;
+	//struct rusage usage;
+	//getrusage(RUSAGE_SELF, &usage);
+	//long peak_memory = usage.ru_maxrss;
 
-	mlg.PrintStatistics();
+	mlg.PrintStatistics(true);
 
 	/*std::ofstream memory_file(DEFAULT_OUTFILE_PATH + infile_name, std::ios::app);
 	if (memory_file.is_open()) {
@@ -27,9 +27,12 @@ int main(int argc, char* argv[]) {
 	}*/
 
 	if (mlg.GetL() > 0) {
-		const Graph& graph = mlg.GetGraph(0);
-		Clique clique(mlg.GetN(), graph);
-		clique.MCE();
+		for (int i = 0; i < mlg.GetL(); i++) {
+			const Graph& graph = mlg.GetGraph(i);
+			Clique clique(mlg.GetN(), graph, infile_name);
+			clique.MCE();
+			clique.PrintStatistics();
+		}
 	}
 
 	return 0;

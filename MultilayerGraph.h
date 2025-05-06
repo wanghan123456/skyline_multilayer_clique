@@ -21,7 +21,7 @@ public:
 		return l;
 	}
 
-	[[nodiscard]] Graph GetGraph(int layer) const {
+	[[nodiscard]] const Graph& GetGraph(int layer) const {
 		return slg_s[layer];
 	}
 

@@ -59,6 +59,6 @@ void MultilayerGraph::PrintStatistics(bool print_detail) {
 	outfile.close();
 
 	for (int i = 0; i < this->l; i++) {
-		slg_s[i].PrintStatistics();
+		slg_s[i].PrintStatistics(print_detail);
 	}
 }

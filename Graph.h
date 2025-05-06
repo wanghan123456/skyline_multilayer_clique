@@ -56,14 +56,13 @@ public:
 
 	void PrintStatistics(bool print_detail = false);
 
-	const std::vector<std::vector<int>>& GetAdjList() const {
+	[[nodiscard]] const std::vector<std::vector<int>>& GetAdjList() const {
 		return adj_lst;
 	}
 	
 private:
 	int n{ 0 };
 	int m{ 0 };
-	int layer_id{ -1 };
 	std::string out_file;
 	std::vector<std::vector<int>> adj_lst;
 	std::vector<int> vtx_deg;

@@ -8,23 +8,27 @@ void Clique::BKP(std::unordered_set<int>& R, std::unordered_set<int>& P, std::un
 		return;
 	}
 
-	for (const auto& vtx : P) {
-		R.insert(vtx);
-		P.erase(vtx);
+	std::vector<int> P_vec(P.begin(), P.end());
+	for (const int& vtx : P_vec) {
+		std::unordered_set<int> R_new(R);
 		std::unordered_set<int> P_new(P);
 		std::unordered_set<int> X_new(X);
-		UpdatePX(vtx, P_new, X_new);
-		BKP(R, P, X);
-		R.erase(vtx);
+		
+		UpdatePX(vtx, R_new, P_new, X_new);
+		BKP(R_new, P_new, X_new);
+		P.erase(vtx);
 		X.insert(vtx);
 	}
 }
 
-void Clique::UpdatePX(const int& vtx, std::unordered_set<int>& P, std::unordered_set<int>& X) {
+void Clique::UpdatePX(const int& vtx, std::unordered_set<int>& R, std::unordered_set<int>& P, std::unordered_set<int>& X) {
 	const auto& adj_lst = graph.GetAdjList();
 	const auto& neighbors = adj_lst[vtx];
+	std::unordered_set<int> new_R(R);
 	std::unordered_set<int> new_P;
 	std::unordered_set<int> new_X;
+
+	new_R.insert(vtx);
 
 	for (int neighbor : neighbors) {
 		if (R.find(neighbor) == R.end()) {
@@ -36,11 +40,18 @@ void Clique::UpdatePX(const int& vtx, std::unordered_set<int>& P, std::unordered
 			}
 		}
 	}
-
+	R = new_R;
 	P = new_P;
 	X = new_X;
 }
 
 void Clique::MCE() {
+
 	BKP(this->R, this->P, this->X);
+}
+
+void Clique::PrintStatistics(bool print_detail) {
+	std::ofstream outfile(DEFAULT_OUTFILE_PATH + infile_name, std::ios::app);
+	outfile << "Maximal Clique count: " << clique_num << std::endl;
+	outfile.close();
 }

@@ -5,6 +5,10 @@ void Graph::LoadGraph(std::vector<mlg_edge>& edge_buf, int& start_pos, int& end_
 	//initiate 
 	this->n = num_vtx;
 	adj_lst.reserve(n);
+	std::vector<int> temp;
+	for (int i = 0; i < n; i++) {
+		adj_lst.emplace_back(temp);
+	}
 	vtx_deg.resize(n, 0);
 	vtx_exist.resize(n, true);
 	this->out_file = file_name;
@@ -31,7 +35,10 @@ void Graph::LoadGraph(std::vector<mlg_edge>& edge_buf, int& start_pos, int& end_
 
 void Graph::PrintStatistics(bool print_detail) {
 	if (this->m == 0) { return; }
-
+	if (print_detail) {
+		std::cout <<"vtx count: "<< this->adj_lst.size() << std::endl;
+		std::cout << "vtx 4: " << this->adj_lst[4].size() << std::endl;
+	}
 	std::ofstream outfile(DEFAULT_OUTFILE_PATH + this->out_file, std::ios::app);
 	outfile << "vertex number: " << this->n << " || " << "edge number: " << this->m << " || " << "max degree: " << this->max_deg << std::endl;
 	outfile.close();
